@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
+import dj_database_url        
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,10 +80,10 @@ WSGI_APPLICATION = 'duomedic.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prueba',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',  
+        'NAME': 'd5acaovvuv394s',
+        'USER': 'ud98cbb44gc7ec',
+        'PASSWORD': 'pe4386b6dccceb8c5055b96250fdeda3dbb8d6459971b6926c994463853caa926',
+        'HOST': 'caij57unh724n3.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',  
         'PORT': 5432,  
     }
 }
@@ -140,3 +143,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'consultorio.duomedic.ambato@gmail.com' 
 EMAIL_HOST_PASSWORD = 'duomedic.1234'
+
+
+django_heroku.settings(locals())
