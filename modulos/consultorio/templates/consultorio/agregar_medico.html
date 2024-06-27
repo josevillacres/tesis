@@ -1,0 +1,119 @@
+{% extends 'consultorio/navbar.html' %}
+{% block content %}
+<style>
+  .form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 48%;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+}
+</style>
+<div class="container">
+    <h2>AGREGAR MÉDICO</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-container">
+            <div class="personal-data">
+                <h3>DATOS PERSONALES</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.cedula.id_for_label }}">CÉDULA</label>
+                        {{ form.cedula }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.apellido1.id_for_label }}">APELLIDOS</label>
+                        {{ form.apellido1 }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.nombre1.id_for_label }}">NOMBRES</label>
+                        {{ form.nombre1 }}
+                    </div>
+                    <div class="form-group">
+                        <label>GÉNERO</label>
+                        <!-- Agregar campo de género si no existe -->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>ESTADO CIVIL</label>
+                        <!-- Agregar campo de estado civil si no existe -->
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">CORREO</label>
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.celular.id_for_label }}">CELULAR</label>
+                        {{ form.celular }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.direccion.id_for_label }}">DIRECCIÓN</label>
+                        {{ form.direccion }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="credentials">
+                <h3>CREDENCIALES</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.usuario.password.id_for_label }}">CONTRASEÑA</label>
+                        {{ form.usuario.password }}
+                    </div>
+                    <div class="form-group">
+                        <label>CONFIRMAR CONTRASEÑA</label>
+                        <!-- Agregar campo de confirmación de contraseña -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="informative-data">
+                <h3>DATOS INFORMATIVOS</h3>
+                <div class="form-group">
+                    <label for="{{ form.especialidad.id_for_label }}">ESPECIALIDAD</label>
+                    {{ form.especialidad }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

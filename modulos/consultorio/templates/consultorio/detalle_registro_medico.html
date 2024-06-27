@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Detalle de Registro Médico</h2>
+<p><strong>Paciente:</strong> {{ registro.paciente }}</p>
+<p><strong>Médico:</strong> {{ registro.medico }}</p>
+<p><strong>Fecha de Registro:</strong> {{ registro.fecha_registro_medico }}</p>
+<p><strong>Razón:</strong> {{ registro.razon }}</p>
+
+<h3>Signos Vitales</h3>
+{% for signos_vitales_item in signos_vitales %}
+    <p><strong>Presión:</strong> {{ signos_vitales_item.presion }}</p>
+    <p><strong>Temperatura:</strong> {{ signos_vitales_item.temperatura }}</p>
+    <p><strong>Talla:</strong> {{ signos_vitales_item.talla }}</p>
+    <p><strong>Peso:</strong> {{ signos_vitales_item.peso }}</p>
+    <p><strong>IMC:</strong> {{ signos_vitales_item.imc }}</p>
+{% empty %}
+    <p>No se han registrado signos vitales.</p>
+{% endfor %}
+
+<h3>Diagnósticos</h3>
+{% for diagnostico_item in diagnosticos %}
+    <p><strong>Enfermedad:</strong> {{ diagnostico_item.enfermedad }}</p>
+    <p><strong>Descripción:</strong> {{ diagnostico_item.descripcion }}</p>
+    <p><strong>Fecha de Diagnóstico:</strong> {{ diagnostico_item.fecha_diagnostico }}</p>
+{% empty %}
+    <p>No se han registrado diagnósticos.</p>
+{% endfor %}
+
+<h3>Prescripciones Médicas</h3>
+{% for prescripcion_item in prescripciones %}
+    <p><strong>Medicamento:</strong> {{ prescripcion_item.medicamento }}</p>
+    <p><strong>Dosis:</strong> {{ prescripcion_item.dosis }}</p>
+    <p><strong>Frecuencia:</strong> {{ prescripcion_item.frecuencia }}</p>
+    <p><strong>Duración:</strong> {{ prescripcion_item.duracion }}</p>
+    <p><strong>Instrucciones:</strong> {{ prescripcion_item.instrucciones }}</p>
+{% empty %}
+    <p>No se han registrado prescripciones médicas.</p>
+{% endfor %}
+
+<a href="{% url 'agregar_editar_signos_vitales' registro.id %}">Agregar Signos Vitales</a><br>
+<a href="{% url 'agregar_editar_diagnostico' registro.id %}">Agregar Diagnóstico</a><br>
+<a href="{% url 'agregar_editar_prescripcion_medica' registro.id %}">Agregar Prescripción Médica</a><br>
+{% endblock %}

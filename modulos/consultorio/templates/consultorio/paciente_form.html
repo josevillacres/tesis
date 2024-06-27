@@ -1,0 +1,131 @@
+{% extends 'consultorio/navbar.html' %}
+{% block content %}
+<style>
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .form-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+  }
+  .form-group {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 10px;
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  .buttons {
+    text-align: right;
+    margin-top: 20px;
+  }
+  .btn {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .btn-secondary {
+    background-color: #008CBA;
+    color: white;
+  }
+</style>
+
+<div class="container">
+    <div class="form-container">
+        <h2 class="text-center mb-4">{% if form.instance.pk %}EDITAR{% else %}CREAR{% endif %} PACIENTE</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-section">
+                <h3>DATOS PERSONALES</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.cedula.id_for_label }}">CÉDULA</label>
+                        {{ form.cedula }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.nombre1.id_for_label }}">NOMBRE 1</label>
+                        {{ form.nombre1 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.nombre2.id_for_label }}">NOMBRE 2</label>
+                        {{ form.nombre2 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.apellido1.id_for_label }}">APELLIDO 1</label>
+                        {{ form.apellido1 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.apellido2.id_for_label }}">APELLIDO 2</label>
+                        {{ form.apellido2 }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.fecha_nacimiento.id_for_label }}">FECHA DE NACIMIENTO</label>
+                        {{ form.fecha_nacimiento }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.genero.id_for_label }}">GÉNERO</label>
+                        {{ form.genero }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.celular.id_for_label }}">CELULAR</label>
+                        {{ form.celular }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">CORREO</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.direccion.id_for_label }}">DIRECCIÓN</label>
+                        {{ form.direccion }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3>DATOS INFORMATIVOS</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.ocupacion.id_for_label }}">OCUPACIÓN</label>
+                        {{ form.ocupacion }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.tipo_sangre.id_for_label }}">TIPO DE SANGRE</label>
+                        {{ form.tipo_sangre }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{% url 'pacientes' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,152 @@
+<!-- registro_medico_form.html -->
+
+{% extends 'consultorio/navbar.html' %} 
+
+{% block content %}
+<div class="container">
+  <h1 class="mt-5">Generar Consulta para {{ paciente.nombre1 }} {{ paciente.apellido1 }}</h1>
+
+  <form method="POST" class="needs-validation" novalidate>
+    {% csrf_token %}
+
+    <!-- Formulario de RegistroMedico -->
+    <div class="mb-3">
+      <label for="id_paciente" class="form-label">Paciente</label>
+      <input type="text" class="form-control" id="id_paciente" value="{{ paciente.nombre1 }} {{ paciente.apellido1 }}" readonly>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_fecha_registro_medico" class="form-label">Fecha de Consulta</label>
+      <input type="datetime-local" class="form-control" id="id_fecha_registro_medico" name="fecha_registro_medico" required>
+      <div class="invalid-feedback">
+        Por favor ingresa la fecha de la consulta.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_razon" class="form-label">Motivo de la Consulta</label>
+      <textarea class="form-control" id="id_razon" name="razon" rows="3" required></textarea>
+      <div class="invalid-feedback">
+        Por favor ingresa el motivo de la consulta.
+      </div>
+    </div>
+
+    <!-- Formulario de SignosVitales -->
+   <!-- Signos Vitales en Card con dos columnas -->
+   <div class="card mb-3">
+    <div class="card-body">
+      <h3 class="card-title">Signos Vitales</h3>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="id_peso" class="form-label">Peso</label>
+                <input type="text" class="form-control" id="id_peso" name="peso" maxlength="7">
+              </div>
+          <div class="mb-3">
+            <label for="id_talla" class="form-label">Talla</label>
+            <input type="text" class="form-control" id="id_talla" name="talla" maxlength="7">
+          </div>
+          <div class="mb-3">
+            <label for="id_imc" class="form-label">IMC</label>
+            <input type="text" class="form-control" id="id_imc" name="imc" maxlength="7">
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="id_presion" class="form-label">Presión</label>
+                <input type="text" class="form-control" id="id_presion" name="presion" maxlength="7">
+              </div>
+            
+          
+          <div class="mb-3">
+            <label for="id_temperatura" class="form-label">Temperatura</label>
+            <input type="number" step="0.01" class="form-control" id="id_temperatura" name="temperatura">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Formulario de Diagnostico -->
+    <h3 class="mt-5">Diagnóstico</h3>
+    <div class="mb-3">
+      <label for="id_enfermedad" class="form-label">Enfermedad</label>
+      <select class="form-select" id="id_enfermedad" name="enfermedad" required>
+        <option value="">Selecciona una enfermedad...</option>
+        <!-- Aquí puedes iterar sobre las enfermedades disponibles si es necesario -->
+      </select>
+      <div class="invalid-feedback">
+        Por favor selecciona una enfermedad.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_descripcion_diagnostico" class="form-label">Descripción del Diagnóstico</label>
+      <textarea class="form-control" id="id_descripcion_diagnostico" name="descripcion_diagnostico" rows="3"></textarea>
+    </div>
+
+    <!-- Formulario de PrescripcionMedica -->
+    <h3 class="mt-5">Prescripción Médica</h3>
+    <div class="mb-3">
+      <label for="id_medicamento" class="form-label">Medicamento</label>
+      <select class="form-select" id="id_medicamento" name="medicamento" required>
+        <option value="">Selecciona un medicamento...</option>
+        <!-- Aquí puedes iterar sobre los medicamentos disponibles si es necesario -->
+      </select>
+      <div class="invalid-feedback">
+        Por favor selecciona un medicamento.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_dosis" class="form-label">Dosis</label>
+      <input type="text" class="form-control" id="id_dosis" name="dosis" required>
+      <div class="invalid-feedback">
+        Por favor ingresa la dosis del medicamento.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="id_frecuencia" class="form-label">Frecuencia</label>
+      <input type="text" class="form-control" id="id_frecuencia" name="frecuencia">
+    </div>
+
+    <div class="mb-3">
+      <label for="id_duracion" class="form-label">Duración</label>
+      <input type="text" class="form-control" id="id_duracion" name="duracion">
+    </div>
+
+    <div class="mb-3">
+      <label for="id_instrucciones" class="form-label">Instrucciones</label>
+      <textarea class="form-control" id="id_instrucciones" name="instrucciones" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Consulta</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Validación de formularios con Bootstrap -->
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+              form.addEventListener('submit', function (event) {
+                  if (!form.checkValidity()) {
+                      event.preventDefault()
+                      event.stopPropagation()
+                  }
+
+                  form.classList.add('was-validated')
+              }, false)
+          })
+  })()
+</script>
+{% endblock %}

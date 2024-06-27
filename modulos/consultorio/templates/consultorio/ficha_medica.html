@@ -1,0 +1,122 @@
+{% extends 'consultorio/navbar.html' %} 
+{% block content %}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Ficha Médica de {{ paciente.nombre1 }} {{ paciente.apellido1 }}</h1>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Datos Personales</h2>
+      </div>
+      <div class="card-body">
+          <p><strong>Cédula:</strong> {{ paciente.cedula }}</p>
+          <p><strong>Nombre completo:</strong> {{ paciente.apellido1 }} {{ paciente.apellido2 }} {{ paciente.nombre1 }} {{ paciente.nombre2 }}</p>
+          <p><strong>Género:</strong> {{ paciente.genero }}</p>
+          <p><strong>Tipo de sangre:</strong> {{ paciente.tipo_sangre }}</p>
+          <p><strong>Fecha de Nacimiento:</strong> {{ paciente.fecha_nacimiento }}</p>
+          <p><strong>Email:</strong> {{ paciente.email }}</p>
+          <p><strong>Celular:</strong> {{ paciente.celular }}</p>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Antecedentes Personales</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for antecedente in antecedentes_personales %}
+                  <li class="list-group-item">{{ antecedente.descripcion }}</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Antecedentes Familiares</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for antecedente in antecedentes_familiares %}
+                  <li class="list-group-item">{{ antecedente.descripcion }} - {{ antecedente.relacion }}</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Alergias</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for alergia in alergias %}
+                  <li class="list-group-item">{{ alergia.descripcion }}</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Traumas</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for trauma in traumas %}
+                  <li class="list-group-item">{{ trauma.descripcion }}</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Hábitos</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for habito in habitos %}
+                  <li class="list-group-item">{{ habito.tipo }} - Frecuencia: {{ habito.frecuencia }}{% if habito.descripcion %} - Descripción: {{ habito.descripcion }}{% endif %}</li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div>
+  
+  <div class="card mb-4">
+      <div class="card-header">
+          <h2>Registros Médicos</h2>
+      </div>
+      <div class="card-body">
+          <ul class="list-group list-group-flush">
+              {% for registro in registros_medicos %}
+                  <li class="list-group-item">
+                      <h5>Fecha: {{ registro.fecha_registro_medico }} - Razón: {{ registro.razon }}</h5>
+                      <h6>Diagnósticos</h6>
+                      <ul class="list-group list-group-flush">
+                          {% for diagnostico in diagnosticos %}
+                              {% if diagnostico.registro_medico == registro %}
+                                  <li class="list-group-item">{{ diagnostico.enfermedad.nombre }} - {{ diagnostico.descripcion }}</li>
+                              {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <h6>Prescripciones Médicas</h6>
+                      <ul class="list-group list-group-flush">
+                          {% for prescripcion in prescripciones_medicas %}
+                              {% if prescripcion.registro_medico == registro %}
+                                  <li class="list-group-item">{{ prescripcion.medicamento.nombre }} - Dosis: {{ prescripcion.dosis }}{% if prescripcion.frecuencia %} - Frecuencia: {{ prescripcion.frecuencia }}{% endif %} {% if prescripcion.duracion %} - Duración: {{ prescripcion.duracion }}{% endif %} {% if prescripcion.instrucciones %} - Instrucciones: {{ prescripcion.instrucciones }}{% endif %}</li>
+                              {% endif %}
+                          {% endfor %}
+                      </ul>
+                  </li>
+              {% endfor %}
+          </ul>
+      </div>
+      <div class="buttons">
+        <a href="{% url 'pacientes' %}" class="btn btn-secondary">REGRESAR</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

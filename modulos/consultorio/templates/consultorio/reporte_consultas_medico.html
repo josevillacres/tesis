@@ -1,0 +1,24 @@
+{% extends 'consultorio/navbar.html' %} {% block content %}
+<h1>Reporte de Consultas Médicas para {{ medico }}</h1>
+
+    <h3>Resumen General</h3>
+    <ul>
+        <li>Total de consultas: {{ total_consultas }}</li>
+        <li>Pacientes atendidos: {{ pacientes_atendidos }}</li>
+        <li>Última consulta registrada: {{ ultima_consulta }}</li>
+    </ul>
+
+    <h3>Diagnósticos más comunes</h3>
+    <ul>
+        {% for diagnostico in diagnosticos %}
+        <li>{{ diagnostico.enfermedad__nombre }} - {{ diagnostico.total }} diagnósticos</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Prescripciones más comunes</h3>
+    <ul>
+        {% for prescripcion in prescripciones %}
+        <li>{{ prescripcion.medicamento__nombre }} - {{ prescripcion.total }} prescripciones</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}

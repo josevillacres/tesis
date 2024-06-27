@@ -1,0 +1,134 @@
+{% extends 'consultorio/navbar.html' %} {% block content %}
+<h1>Listado de Pacientes</h1>
+<div class="container">
+  <div>
+    <form class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Ingrese cedula o nombre del paciente"
+        aria-label="Buscar"
+      />
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+      <div style="margin-left: 200px">
+        <a href="{% url 'crear_paciente' %}" class="btn btn-primary">CREAR</a>
+      </div>
+    </form>
+  </div>
+</div>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Fecha de Nacimiento</th>
+      <th>Género</th>
+      <th>Celular</th>
+      <th>Email</th>
+      <th>Dirección</th>
+      <th>Ocupación</th>
+      <th>Tipo de Sangre</th>
+      <th>ACCIONES</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paciente in pacientes %}
+    <tr>
+      <td>{{ paciente.cedula }}</td>
+      <td>{{ paciente.nombre1 }}</td>
+      <td>{{ paciente.apellido1 }}</td>
+      <td>{{ paciente.fecha_nacimiento }}</td>
+      <td>{{ paciente.genero }}</td>
+      <td>{{ paciente.celular }}</td>
+      <td>{{ paciente.email }}</td>
+      <td>{{ paciente.direccion }}</td>
+      <td>{{ paciente.ocupacion }}</td>
+      <td>{{ paciente.tipo_sangre.sangre }}</td>
+      <td>
+        <div class="btn-group" role="group">
+          <button
+            id="btnGroupDrop1"
+            type="button"
+            class="btn btn-primary dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ACCIONES
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'editar_paciente' paciente.pk %}"
+                >EDITAR</a
+              >
+            </li>
+            
+            <li>
+              <a
+                class="dropdown-item"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#eliminarPaciente{{ paciente.pk }}"
+                >ELIMINAR</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="{% url 'generar_consulta_paciente' paciente.pk %}">Generar Consulta</a></li>
+            <li><a class="dropdown-item" href="{% url 'ficha_medica_paciente' paciente.pk %}">Mostrar fichas Medicas </a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Modal para confirmar eliminación -->
+    <div
+      class="modal fade"
+      id="eliminarPaciente{{ paciente.pk }}"
+      tabindex="-1"
+      aria-labelledby="eliminarPaciente{{ paciente.pk }}Label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="eliminarPaciente{{ paciente.pk }}Label">
+              Confirmar Eliminación
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              ¿Estás seguro que deseas eliminar al paciente {{ paciente.nombre1}} {{ paciente.apellido1 }}?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <form
+              action="{% url 'eliminar_paciente' paciente.pk %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

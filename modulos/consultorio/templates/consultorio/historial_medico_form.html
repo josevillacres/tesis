@@ -1,0 +1,46 @@
+{% extends 'consultorio/navbar.html' %}
+
+
+{% block content %}
+<div class="form-container">
+    <h2>Historial Médico</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="section">
+            <h3>Información del Paciente</h3>
+            {{ form.paciente.label_tag }} {{ form.paciente }}
+        </div>
+
+        <div class="section">
+            <h3>Antecedentes Personales</h3>
+            {{ form.antecedentes_personales.label_tag }} {{ form.antecedentes_personales }}
+        </div>
+
+        <div class="section">
+            <h3>Antecedentes Familiares</h3>
+            {{ form.antecedentes_familiares.label_tag }} {{ form.antecedentes_familiares }}
+            {{ form.relacion_familiar.label_tag }} {{ form.relacion_familiar }}
+        </div>
+
+        <div class="section">
+            <h3>Alergias</h3>
+            {{ form.alergias.label_tag }} {{ form.alergias }}
+        </div>
+
+        <div class="section">
+            <h3>Traumas</h3>
+            {{ form.traumas.label_tag }} {{ form.traumas }}
+        </div>
+
+        <div class="section">
+            <h3>Hábitos</h3>
+            {{ form.habitos.label_tag }} {{ form.habitos }}
+            {{ form.frecuencia_habitos.label_tag }} {{ form.frecuencia_habitos }}
+            {{ form.descripcion_habitos.label_tag }} {{ form.descripcion_habitos }}
+        </div>
+
+        <button type="submit" class="submit-button">Guardar Historial Médico</button>
+    </form>
+</div>
+{% endblock %}

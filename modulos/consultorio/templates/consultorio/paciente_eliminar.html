@@ -1,0 +1,11 @@
+{% extends 'consultorio/navbar.html' %} 
+
+{% block content %}
+  <h2>Eliminar Paciente</h2>
+  <p>¿Estás seguro de que quieres eliminar al paciente {{ paciente }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+  </form>
+  <a href="{% url 'pacientes' %}">Cancelar</a>
+{% endblock %}

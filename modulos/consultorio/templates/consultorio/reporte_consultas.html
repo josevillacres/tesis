@@ -1,0 +1,90 @@
+<!-- reporte_consultas.html -->
+
+{% extends 'consultorio/navbar.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>Reporte de Consultas Médicas</h1>
+
+    <!-- Formulario para seleccionar médico -->
+    <form method="get">
+      <div class="mb-3">
+        <label for="id_medico" class="form-label">Selecciona un médico:</label>
+        <select class="form-select" name="medico" id="id_medico">
+          <option value="">Selecciona un médico...</option>
+          <option value="1">Dr. Cesar Gerrero</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Generar Reporte</button>
+    </form>
+
+    <!-- Gráfico de Consultas por Mes -->
+    <div class="mt-5">
+      <h3>Consultas por Mes</h3>
+      <canvas id="graficoConsultasPorMes" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Gráfico de Consultas por Día -->
+    <div class="mt-5">
+      <h3>Consultas por Día</h3>
+      <canvas id="graficoConsultasPorDia" width="400" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- Incluir Chart.js desde un CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Script para inicializar los gráficos -->
+  <script>
+    // Datos ficticios para los gráficos (simulación de consultas)
+    const datosConsultasPorMes = [12, 19, 3, 5, 2];
+    const datosConsultasPorDia = [8, 5, 12, 9, 4];
+
+    // Gráfico de Consultas por Mes
+    var ctxMes = document.getElementById('graficoConsultasPorMes').getContext('2d');
+    var graficoMes = new Chart(ctxMes, {
+      type: 'bar',
+      data: {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+        datasets: [{
+          label: 'Consultas',
+          data: datosConsultasPorMes,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Gráfico de Consultas por Día
+    var ctxDia = document.getElementById('graficoConsultasPorDia').getContext('2d');
+    var graficoDia = new Chart(ctxDia, {
+      type: 'line',
+      data: {
+        labels: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
+        datasets: [{
+          label: 'Consultas',
+          data: datosConsultasPorDia,
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+<!-- correo_consulta_medica.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Médica</title>
+</head>
+<body>
+    <h2>Consulta Médica</h2>
+
+    <p>Estimado/a {{ paciente.nombre1 }} {{ paciente.apellido1 }},</p>
+
+    <p>Le informamos que ha recibido una nueva consulta médica. A continuación, los detalles:</p>
+
+    <p><strong>Médico:</strong> Dr. {{ medico.nombre1 }} {{ medico.apellido1 }}</p>
+    <p><strong>Consultorio:</strong> {{ consultorio }}</p>
+
+    <h3>Diagnóstico</h3>
+    <p>{{ registro_medico.diagnostico.descripcion }}</p>
+
+    <h3>Prescripción Médica</h3>
+    <p><strong>Medicamento:</strong> {{ registro_medico.prescripcion_medica.medicamento.nombre }}</p>
+    <p><strong>Dosis:</strong> {{ registro_medico.prescripcion_medica.dosis }}</p>
+    <p><strong>Frecuencia:</strong> {{ registro_medico.prescripcion_medica.frecuencia }}</p>
+    <p><strong>Duración:</strong> {{ registro_medico.prescripcion_medica.duracion }}</p>
+    <p><strong>Instrucciones:</strong> {{ registro_medico.prescripcion_medica.instrucciones }}</p>
+
+    <p>Atentamente,</p>
+    <p>{{ firma_electronica }}</p>
+</body>
+</html>

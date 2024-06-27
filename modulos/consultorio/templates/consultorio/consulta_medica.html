@@ -1,0 +1,19 @@
+<!-- consulta_medica.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta Médica</title>
+</head>
+<body>
+    <h2>Consulta Médica para {{ paciente.nombre1 }} {{ paciente.apellido1 }}</h2>
+    <p>Diagnóstico: {{ diagnostico.descripcion }}</p>
+    <p>Prescripción Médica: {{ prescripcion.medicamento.nombre }} - {{ prescripcion.dosis }}</p>
+    <hr>
+    <p>Médico: {{ medico.nombre1 }} {{ medico.apellido1 }}</p>
+    <p>Consultorio: {{ consultorio.nombre }}</p>
+    <p>Firma Electrónica:</p>
+    <img src="data:image/png;base64,{{ qr_code }}" alt="Firma Electrónica">
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends 'consultorio/navbar.html' %} {% block content %}
+
+<h1>
+  ¿Estás seguro que deseas eliminar al médico {{ medico.nombre1 }} {{
+  medico.apellido1 }}?
+</h1>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Confirmar Eliminar</button>
+</form>
+{% endblock %}
