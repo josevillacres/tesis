@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import os
-import django_heroku
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-t6sjp5_*!o@gk%6m35u_^m)fs*zpy-emd9jxm^(pke*5pgbx_z'
@@ -23,6 +26,9 @@ SECRET_KEY = 'django-insecure-t6sjp5_*!o@gk%6m35u_^m)fs*zpy-emd9jxm^(pke*5pgbx_z
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,21 +70,44 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'duomedic.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd5acaovvuv394s',
-        'USER': 'ud98cbb44gc7ec',
-        'PASSWORD': 'pe4386b6dccceb8c5055b96250fdeda3dbb8d6459971b6926c994463853caa926',
-        'HOST': 'caij57unh724n3.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
-        'PORT': 5432,
+        'NAME': 'prueba',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',  
+        'PORT': 5432,  
     }
 }
 
-# Password validation, internationalization, etc.
+
+
+# Password validation
+# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'es-ec'
 
@@ -86,18 +115,13 @@ TIME_ZONE = 'America/Guayaquil'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),  # Asegúrate de que haya una coma al final
-)
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -105,16 +129,14 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'pacientes'
+LOGIN_REDIRECT_URL = 'medicos'
 LOGOUT_REDIRECT_URL = 'login'
 
-# Configuración del correo electrónico
 
+# Configuración del correo electrónico
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'consultorio.duomedic.ambato@gmail.com'
+EMAIL_HOST_USER = 'consultorio.duomedic.ambato@gmail.com' 
 EMAIL_HOST_PASSWORD = 'duomedic.1234'
-
-# Configuración de Django Heroku
-django_heroku.settings(locals())
